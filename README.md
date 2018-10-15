@@ -40,5 +40,6 @@ Without docker:
 
 With docker and AppDynamics:
 
-1. `docker build . -t appd-demo-account`
-2. `docker run -d -p 8082:8082 --name=account -v /opt/java-agent:/usr/java-agent -e "JAVA_OPTS=-Dserver.port=8082 -javaagent:/usr/java-agent/javaagent.jar -Dappdynamics.agent.applicationName=Mobile -Dappdynamics.agent.tierName=login -Dappdynamics.agent.reuse.nodeName=true -Dappdynamics.agent.reuse.nodeName.prefix=login -Dappdynamics.controller.port=8090 -Dappdynamics.controller.hostName=controller_hostname -Dappdynamics.agent.accountAccessKey=controller_access_key" appd-demo-account`
+1. `docker network create mobile`
+2. `docker build . -t appd-demo-account`
+3. `docker run -d -p 8082:8082 --net=mobile --name=account -v /opt/java-agent:/usr/java-agent -e "JAVA_OPTS=-Dserver.port=8082 -javaagent:/usr/java-agent/javaagent.jar -Dappdynamics.agent.applicationName=Mobile -Dappdynamics.agent.tierName=login -Dappdynamics.agent.reuse.nodeName=true -Dappdynamics.agent.reuse.nodeName.prefix=login -Dappdynamics.controller.port=8090 -Dappdynamics.controller.hostName=controller_hostname -Dappdynamics.agent.accountAccessKey=controller_access_key" appd-demo-account`
